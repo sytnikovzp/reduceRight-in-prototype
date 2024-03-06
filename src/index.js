@@ -17,7 +17,7 @@ function MyArray(...args) {
   this.length = args.length;
   if (args.length) {
     for (let i = 0; i < args.length; i++) {
-      this[i]= args[i];
+      this[i] = args[i];
     }
   }
 }
@@ -37,25 +37,24 @@ function MyArrayProto() {
   this.reduceRight = function (callback, initialValue) {
     let result = initialValue;
     let currentIndex = this.length - 1;
-    if (initialValue) {
-      for (let i = currentIndex; i >= 0; i--) {
-        result = callback(result, this[i], i, this);
-      }
-    } else {
+
+    if (!initialValue) {
       result = this[this.length - 1];
       currentIndex = this.length - 2;
-      for (let i = currentIndex; i >= 0; i--) {
-        if (i in this) {
-          result = callback(result, this[i], i, this);
-        }
+    }
+
+    for (let i = currentIndex; i >= 0; i--) {
+      if (i in this) {
+        result = callback(result, this[i], i, this);
       }
     }
+
     return result;
   };
 }
 
 // Verify method
-const myTestArray1 = new MyArray(1, 2, 3, 4, 5, 6 , 'test');
+const myTestArray1 = new MyArray(1, 2, 3, 4, 5, 6, 'test');
 const resultReduceRight = myTestArray1.reduceRight(
   (result, currentValue) => result + currentValue,
   100
