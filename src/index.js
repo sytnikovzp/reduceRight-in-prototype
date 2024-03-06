@@ -33,6 +33,7 @@ function MyArrayProto() {
     }
     return this.length;
   };
+
   this.reduceRight = function (callback, initialValue) {
     if (initialValue) {
       result = initialValue;
@@ -54,9 +55,10 @@ function MyArrayProto() {
 }
 
 // Verify method
-const myTestArray1 = [1, 2, 3, 4, 5, 6];
-const resultReduceRight = myTestArray1.reduceRight(function (result, currentNumber) {
-  return result + currentNumber;
-}, 100);
+const myTestArray1 = [1, 2, 3, 4, 5, 6, 'text'];
+const resultReduceRight = myTestArray1.reduceRight(
+  (result, currentValue) => result + currentValue,
+  100
+);
 
 console.log(resultReduceRight);
